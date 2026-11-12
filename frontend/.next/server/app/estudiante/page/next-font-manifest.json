@@ -1,0 +1,13 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/estudiante/page": [
+      "static/media/0ef0042026af37d3-s.p.1xt3x57tcdmbv.woff2",
+      "static/media/6966fb49052e79a7-s.p.1wh0qzzwls4_i.woff2",
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/9a321a2c78eff0b5-s.p.1bkzbscqrt8rl.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

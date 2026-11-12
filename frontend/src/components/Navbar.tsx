@@ -1,52 +1,57 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { BRAND } from '../config/brand';
-import { useAuth } from '../context/AuthContext';
-import { homePathFor } from '../utils/routes';
-import ThemeSwitcher from './ThemeSwitcher';
+"use client";
 
-export default function Navbar() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+import Link from "next/link";
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+interface NavbarProps {
+  brandName: string;
+  brandSuffix: string;
+  panelHref?: string;
+  panelLabel?: string;
+  userName?: string | null;
+  onLogout?: () => void;
+  rightExtra?: React.ReactNode;
+}
 
+export function Navbar({
+  brandName,
+  brandSuffix,
+  panelHref,
+  panelLabel,
+  userName,
+  onLogout,
+  rightExtra,
+}: NavbarProps) {
   return (
     <header className="navbar">
       <div className="container navbar-inner">
-        <Link to="/" className="brand">
+        <Link href="/" className="brand">
           <span className="brand-dot" />
-          {BRAND.name} · {BRAND.suffix}
+          {brandName} · {brandSuffix}
         </Link>
 
         <nav className="nav-center">
-          {user && (
-            <NavLink
-              to={homePathFor(user.role)}
-              className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}
-            >
-              {user.role === 'profesor' ? 'Panel' : 'Mis tareas'}
-            </NavLink>
+          {panelHref && panelLabel && (
+            <Link href={panelHref} className="nav-link">
+              {panelLabel}
+            </Link>
           )}
         </nav>
 
         <div className="nav-right">
-          <ThemeSwitcher />
-          {user ? (
+          {rightExtra}
+          {userName ? (
             <>
-              <span className="nav-user">{user.name}</span>
-              <button className="btn" onClick={handleLogout}>
+              <span className="nav-user">{userName}</span>
+              <button className="btn" onClick={onLogout}>
                 Salir
               </button>
             </>
           ) : (
             <>
-              <Link className="nav-link" to="/login">
+              <Link className="nav-link" href="/login">
                 Acceder
               </Link>
-              <Link className="btn" to="/registro">
+              <Link className="btn" href="/registro">
                 Registrarse
               </Link>
             </>

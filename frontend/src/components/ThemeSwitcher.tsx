@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import { applyTheme, getSavedTheme, ThemeId, THEMES } from '../theme';
+"use client";
 
-export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<ThemeId>(getSavedTheme);
+import { THEMES, type ThemeId } from "@/lib/theme";
 
-  const change = (id: ThemeId) => {
-    setTheme(id);
-    applyTheme(id);
-  };
+interface ThemeSwitcherProps {
+  value: ThemeId;
+  onChange: (id: ThemeId) => void;
+}
 
+export function ThemeSwitcher({ value, onChange }: ThemeSwitcherProps) {
   return (
     <select
       className="theme-select"
-      value={theme}
-      onChange={(e) => change(e.target.value as ThemeId)}
+      value={value}
+      onChange={(e) => onChange(e.target.value as ThemeId)}
       aria-label="Tema de color"
     >
       {THEMES.map((t) => (
